@@ -4,9 +4,7 @@ const jwt = require("jsonwebtoken");
 // Registration
 exports.registration = (req, res) => {
   let reqBody = req.body;
-
   UsersModel.create(reqBody, (err, data) => {
-    // console.log(data);
     if (err) {
       res.status(400).json({ status: "fail", data: err });
     } else {
@@ -45,6 +43,7 @@ exports.login = (req, res) => {
   );
 };
 
+// userModel get Data all
 exports.getRegis = (req, res) => {
   UsersModel.find({}, (err, data) => {
     if (err) {
@@ -55,12 +54,40 @@ exports.getRegis = (req, res) => {
   });
 };
 
+// get data by ID
 exports.getById = (req, res) => {
   let id = req.params.id 
-  UsersModel.findOne(query , (err ,data) => {
+  UsersModel.findById(id , (err ,data) => {
     if (err) {
       res.status(400).json({ status: "fail", data: err });
     } else {
+      res.status(200).json({ status: "success", data: data });
+    }
+  })
+}
+
+//  Deleted Data By ID 
+exports.deleteById = (req, res) => {
+  let id = req.params.id
+  UsersModel.findByIdAndDelete({_id : id} , (err , data)  => {
+    if(err){
+      res.status(400).json({status : 'fail' , data : err})
+    }else {
+      res.status(200).json({ status: "success", data: data });
+    }
+  })
+}
+
+// update User 
+exports.updateUser = (req, res) => {
+  let  id = req.params.id ; 
+  let update = req.body ; 
+  console.log(id) ; 
+  console.log(update)
+  UsersModel.findByIdAndUpdate(id , update , {new : true} , (err , data) => {
+    if(err){
+      res.status(400).json({status : 'fail' , data : err})
+    }else {
       res.status(200).json({ status: "success", data: data });
     }
   })
