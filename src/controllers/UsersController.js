@@ -19,7 +19,7 @@ exports.login = (req, res) => {
     [
       { $match: reqBody },
       {
-        $project: { _id: 1, email: 1, password: 1, firstName: 1, lastName: 1 },
+        $project: { _id: 1, email: 1, password: 1, firstName: 1, lastName: 1 ,  },
       },
     ],
     (err, data) => {
@@ -82,8 +82,6 @@ exports.deleteById = (req, res) => {
 exports.updateUser = (req, res) => {
   let  id = req.params.id ; 
   let update = req.body ; 
-  console.log(id) ; 
-  console.log(update)
   UsersModel.findByIdAndUpdate(id , update , {new : true} , (err , data) => {
     if(err){
       res.status(400).json({status : 'fail' , data : err})
