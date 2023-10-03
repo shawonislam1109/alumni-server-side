@@ -9,7 +9,7 @@ const {
   deleteById,
   updateUser,
 } = require("../controllers/UsersController");
-const { Event, eventAll, singleEvent } = require("../controllers/eventController");
+const { Event, eventAll, singleEvent, eventDelete } = require("../controllers/eventController");
 
 
 // user data router
@@ -24,5 +24,6 @@ router.put('/updateUser/:id' , updateUser)
 router.post('/event' , Event)
 router.get('/eventAll', eventAll)
 router.get('/singleEvent/:id' , singleEvent)
+router.delete('/deleteEvent/:id' , eventDelete)
 // router.post("/student", student);
 module.exports = router;

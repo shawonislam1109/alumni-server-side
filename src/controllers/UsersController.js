@@ -12,6 +12,8 @@ exports.registration = (req, res) => {
     }
   });
 };
+
+
 // login
 exports.login = (req, res) => {
   let reqBody = req.body;
@@ -36,7 +38,7 @@ exports.login = (req, res) => {
             .status(200)
             .json({ status: "success", token: token, data: data[0] });
         } else {
-          res.status(401).json({ status: "unauthorized" });
+          res.status(401).json({ status: "unauthorized"  });
         }
       }
     }

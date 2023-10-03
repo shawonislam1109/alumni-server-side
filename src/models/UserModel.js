@@ -42,6 +42,9 @@ const DataSchema = mongoose.Schema(
     jobStatus : {
       type : Boolean
     },
+    thumbnail: {
+      type : String
+    },
     // photo: { type: String },
     createdDate: {
       type: Date,
