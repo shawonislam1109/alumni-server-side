@@ -81,14 +81,15 @@ exports.deleteById = (req, res) => {
 }
 
 // update User 
-exports.updateUser = (req, res) => {
+exports.updateUser = async (req, res) => {
+   try {
   let  id = req.params.id ; 
-  let update = req.body ; 
-  UsersModel.findByIdAndUpdate(id , update , {new : true} , (err , data) => {
-    if(err){
-      res.status(400).json({status : 'fail' , data : err})
-    }else {
-      res.status(200).json({ status: "success", data: data });
-    }
-  })
+  const user = await UsersModel.findById(id)
+  Object.assign(user, req.body)
+  console.log(req.body)
+  const data = await user.save()
+    res.status(200).json({ status: "success", data: data });
+  } catch (error) {
+    res.status(400).json({status : 'fail' , data : err})    
+  }
 }

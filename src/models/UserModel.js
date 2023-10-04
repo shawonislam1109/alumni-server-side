@@ -9,6 +9,9 @@ const DataSchema = mongoose.Schema(
     firstName: {
       type: String,
     },
+    role: {
+      type: String,
+    },
     lastName: {
       type: String,
     },
